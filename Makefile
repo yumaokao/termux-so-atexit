@@ -12,8 +12,11 @@ a.out: main.o libsoatexit.so
 main.o: main.c
 	clang -c -o $@ $<
 
-run:
+test_so_atexit:
 	@LD_LIBRARY_PATH=./ ./a.out
+
+test_main_atexit:
+	@LD_LIBRARY_PATH=./ ./a.out 1
 
 clean:
 	rm -f *.o *.so a.out
