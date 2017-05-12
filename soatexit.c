@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "soatexit.h"
 
-void so_atexit(void) {
+static void so_atexit(void) {
     printf("atexit called from shared library\n");
+    abort();
 }
 
 int register_atexit(void) {
