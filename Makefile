@@ -27,4 +27,5 @@ issue933: issue933.c
 	clang -o $@ $< -lgpg-error
 
 test-issue933: issue933
+	dpkg -i libgpg-error_1.27_aarch64.deb
 	./issue933

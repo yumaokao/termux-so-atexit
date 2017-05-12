@@ -1,4 +1,6 @@
 *.swp
 *.so
 *.o
+*.deb
+issue933
 a.out
