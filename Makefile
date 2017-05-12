@@ -20,3 +20,11 @@ test_main_atexit:
 
 clean:
 	rm -f *.o *.so a.out
+
+# issue 933
+issue933: issue933.c
+	apt install -y clang libgpg-error-dev
+	clang -o $@ $< -lgpg-error
+
+test-issue933: issue933
+	./issue933
