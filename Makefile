@@ -16,7 +16,7 @@ test_so_atexit:
 	@LD_LIBRARY_PATH=./ ./a.out
 
 gdb_so_atexit:
-	@LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./" gdb ./a.out
+	@LD_LIBRARY_PATH="/data/data/com.termux/files/usr/lib:./" gdb ./a.out
 
 test_main_atexit:
 	@LD_LIBRARY_PATH=./ ./a.out 1
