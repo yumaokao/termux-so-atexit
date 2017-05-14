@@ -30,5 +30,5 @@ issue933: issue933.c
 	clang -o $@ $< -lgpg-error
 
 test_issue933: issue933
-	dpkg -i libgpg-error_1.27_aarch64.deb
+	@[ -f libgpg-error_1.27_aarch64.deb ] && dpkg -i libgpg-error_1.27_aarch64.deb || echo -n
 	./issue933
