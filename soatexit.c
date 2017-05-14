@@ -10,3 +10,8 @@ int register_atexit(void) {
     atexit(so_atexit);
     return 0;
 }
+
+int constructor_atexit(void) {
+    register_atexit();
+    return 0;
+}

@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         atexit(main_atexit);
     } else {
-        register_atexit();
+        // register_atexit();
     }
     return 0;
 }
