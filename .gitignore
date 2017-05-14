@@ -3,6 +3,7 @@
 *.o
 *.deb
 issue933
+issue933-ok
 a.out
 atexit-*
 core
