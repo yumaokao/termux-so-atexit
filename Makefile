@@ -42,8 +42,10 @@ issue933-ok: issue933-ok.c
 
 test_issue933: issue933
 	@[ -f libgpg-error_1.27_aarch64.deb ] && dpkg -i libgpg-error_1.27_aarch64.deb || echo -n
+	@[ -f libgpg-error_1.27-1_aarch64.deb ] && dpkg -i libgpg-error_1.27-1_aarch64.deb || echo -n
 	./issue933
 
 test_issue933-ok: issue933-ok
 	@[ -f libgpg-error_1.27_aarch64.deb ] && dpkg -i libgpg-error_1.27_aarch64.deb || echo -n
+	@[ -f libgpg-error_1.27-1_aarch64.deb ] && dpkg -i libgpg-error_1.27-1_aarch64.deb || echo -n
 	./issue933-ok
