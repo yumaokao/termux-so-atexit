@@ -1,28 +1,35 @@
-all: a.out
+all: atexit-so-constructor atexit-so
 
-libsoatexit.so: soatexit.o
-	clang -g -shared -o $@ $<
+atexit-so-constructor: main.c soatexit.c
+	@clang -g -DUSE_CONSTRUCTOR -c -o soatexit.o soatexit.c
+	@clang -g -DUSE_CONSTRUCTOR -shared -o libsoatexit.so soatexit.o
+	@clang -g -DUSE_CONSTRUCTOR -L. -lsoatexit -o $@ main.c
 
-soatexit.o: soatexit.c
-	clang -g -c -o $@ $<
+atexit-so: main.c soatexit.c
+	@clang -g -c -o soatexit.o soatexit.c
+	@clang -g -shared -o libsoatexit.so soatexit.o
+	@clang -g -L. -lsoatexit -o $@ main.c
 
-a.out: main.o libsoatexit.so
-	clang -g -L. -lsoatexit -o $@ $<
+test_atexit-so-constructor: atexit-so-constructor
+	@echo "Should see messages and aborted"
+	@LD_LIBRARY_PATH=./ ./atexit-so-constructor
 
-main.o: main.c
-	clang -g -c -o $@ $<
+test_atexit-so: atexit-so
+	@echo "Should see messages and aborted"
+	@LD_LIBRARY_PATH=./ ./atexit-so
 
-test_so_atexit:
-	@LD_LIBRARY_PATH=./ ./a.out
+test_atexit-main: atexit-so
+	@echo "Should see messages and aborted"
+	@LD_LIBRARY_PATH=./ ./atexit-so 1
 
-gdb_so_atexit:
-	@LD_LIBRARY_PATH="/data/data/com.termux/files/usr/lib:./" gdb ./a.out
+gdb_atexit-so-constructor:
+	@LD_LIBRARY_PATH="/data/data/com.termux/files/usr/lib:./" gdb ./atexit-so-constructor
 
-test_main_atexit:
-	@LD_LIBRARY_PATH=./ ./a.out 1
+gdb_atexit-so:
+	@LD_LIBRARY_PATH="/data/data/com.termux/files/usr/lib:./" gdb ./atexit-so
 
 clean:
-	rm -f *.o *.so a.out issue933 core
+	rm -f *.o *.so issue933 core atexit-*
 
 # issue 933
 issue933: issue933.c

@@ -10,7 +10,9 @@ int main(int argc, char *argv[]) {
     if (argc > 1) {
         atexit(main_atexit);
     } else {
-        // register_atexit();
+#ifndef USE_CONSTRUCTOR
+        register_atexit();
+#endif
     }
     return 0;
 }
